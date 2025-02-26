@@ -1,0 +1,39 @@
+body {
+    grid-template-areas: 
+    'hd nv'
+    'sc sc'
+    'ft ft'
+    ;
+    grid-template-columns: 50vw 1fr;
+    grid-template-rows: 10vh 90vh 10vh;
+    display: grid;
+}
+
+header {
+    grid-area: hd;
+    background-color: aliceblue;
+}
+
+nav {
+    grid-area: nv;
+    background-color: blue;
+    text-align:end ;
+}
+
+.menu-button{
+    cursor: pointer;
+}
+
+.material-icons {
+    font-size: 50px;
+}
+
+section {
+    grid-area: sc;
+    background-color: darksalmon
+}
+
+footer {
+    grid-area: ft;
+    background-color: floralwhite;
+}
