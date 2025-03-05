@@ -1,17 +1,23 @@
 body {
     grid-template-areas: 
-    'hd nv'
+    'hd hd'
     'sc sc'
     'ft ft'
     ;
     grid-template-columns: 50vw 1fr;
-    grid-template-rows: 10vh 90vh 10vh;
+    grid-template-rows: 100vh 90vh 10vh;
     display: grid;
 }
 
 header {
     grid-area: hd;
     background-color: aliceblue;
+}
+
+#hd-div {
+    justify-self: center;
+    bottom: 0;
+    position: absolute;
 }
 
 nav {
@@ -24,9 +30,41 @@ nav {
     cursor: pointer;
 }
 
+.menu{
+    height: 100vh;
+    width: 80vw;
+    background: hotpink;
+    position: fixed;
+    top: 0;
+    left: -90vw;
+    transition: left 0.3s;
+    box-shadow: 10px 0px 21px -10px rgba(0,0,0,0.75);
+    z-index: 10;
+}
+
+.fade-layer.visible{
+    display: block;
+}
+
+.fade-layer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 5;
+}
+
+.show{
+    left: 0;
+}
+
 .material-icons {
     font-size: 50px;
 }
+
 
 section {
     grid-area: sc;
