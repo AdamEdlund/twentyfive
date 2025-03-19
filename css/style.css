@@ -1,23 +1,6 @@
-body {
-    grid-template-areas: 
-    'hd hd'
-    'sc sc'
-    'ft ft'
-    ;
-    grid-template-columns: 50vw 1fr;
-    grid-template-rows: 100vh 90vh 10vh;
-    display: grid;
-}
-
-header {
-    grid-area: hd;
-    background-color: aliceblue;
-}
-
-#hd-div {
-    justify-self: center;
-    bottom: 0;
-    position: absolute;
+section {
+    grid-area: sc;
+    background-color: darksalmon
 }
 
 nav {
@@ -26,52 +9,135 @@ nav {
     text-align:end ;
 }
 
+footer {
+    grid-area: ft;
+    background-color: floralwhite;
+}
+
+
+
+#index {
+    grid-template-areas: 
+    'hd hd'
+    'sc sc'
+    'sc2 sc2'
+    'ft ft';
+    grid-template-columns: 50vw 1fr;
+    grid-template-rows: 100vh 40vh 50vh 10vh;
+    display: grid;
+    margin: 0;
+}
+
+#index_header {
+    grid-area: hd;
+    background-color: aliceblue;
+    display: flex;
+    background-image:url(../img/albertochflorence.jpg) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#logo {
+    justify-content: center;
+    bottom: 0;
+    position: absolute;
+    left: calc(50% - 100px);
+}
+
 .menu-button{
     cursor: pointer;
 }
 
-.menu{
-    height: 100vh;
-    width: 80vw;
-    background: hotpink;
-    position: fixed;
-    top: 0;
-    left: -90vw;
-    transition: left 0.3s;
-    box-shadow: 10px 0px 21px -10px rgba(0,0,0,0.75);
-    z-index: 10;
+#index_section {
+    text-align: center;
 }
 
-.fade-layer.visible{
-    display: block;
+#kalender {
+    grid-area: sc2;
 }
 
-.fade-layer{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    display: none;
-    z-index: 5;
+.month {
+    padding: 70px 25px;
+    width: 95vw;
+    background: #1abc9c;
+    text-align: center;
 }
 
-.show{
-    left: 0;
+.month ul {
+    margin: 0;
+    padding: 0;
 }
 
-.material-icons {
-    font-size: 50px;
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    color: #666;
+    text-align: center;
+}
+
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color: #777;
+}
+
+.days li .active {
+    padding: 5px;
+    background: #1abc9c;
+    color: white !important
+}
+
+/*Media queries for smaller screens */
+@media screen and (max-width:720px) {
+.weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+.weekdays li, .days li {width: 12.5%;}
+.days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+.weekdays li, .days li {width: 12.2%;}
 }
 
 
-section {
-    grid-area: sc;
-    background-color: darksalmon
-}
-
-footer {
-    grid-area: ft;
-    background-color: floralwhite;
+#info {
+    grid-template-areas: 
+    'hd'
+    'sc'
+    ;
 }
