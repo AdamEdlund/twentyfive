@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Albert & Florence</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+
+<body id="bokning">
+    <header id="bok_header"><h1>Bokning av tid</h1> <a href="index.html"> <img src="img/logo.gif" class="info-logo" alt="svart bild med albert och florence i vit text"></a></header>
+
+    <section>
+        <button class="bok_knapp" onclick="document.getElementById('id01').style.display='block'">Boka tid</button>
+
+        <div id="id01" class="modal">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal"></span>
+            <form class="modal-content" action="/action_page.php">
+              <div class="container">
+                <h1>Boka tid</h1>
+                <p>Vänligen fyll i för att boka.</p>
+                <hr>
+                <label for="email"><b>Förnamn</b></label>
+                <input type="text" placeholder="Skriv förnamn" name="email" required>
+          
+                <label for="psw"><b>Efternamn</b></label>
+                <input type="text" placeholder="Skriv efternamn" name="psw" required>
+          
+                <label for="psw-repeat"><b>Telefonnummer/E-Post</b></label>
+                <input type="text" placeholder="Skriv telefonnummer/E-post" name="psw-repeat" required>
+          
+                <label>
+                  <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Kom ihåg mig
+                </label>
+          
+                <p>Genom att boka tid hos oss godkänner du våra <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+          
+                <div class="clearfix">
+                  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                  <button type="submit" class="bok_knapp" id="bokup">Sign Up</button>
+                </div>
+              </div>
+            </form>
+          </div>
+    </section>
+
+<script src="js/main.js"></script>
+</body>
+</html>
