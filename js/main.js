@@ -75,9 +75,50 @@ calendarDates.addEventListener('click', (e) => {
   
 
 var modal = document.getElementById('id01');
+var btn = document.querySelector('.bok_knapp.main');
+var span = document.getElementsByClassName('close')[0];
 
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+// Funktion för att öppna modalen
+function openModal() {
+  var modal = document.getElementById('id01');
+  modal.style.display = "block";
 }
+
+// När användaren klickar på "x" (stängknappen), stäng modalen
+function closeModal() {
+  var modal = document.getElementById('id01');
+  modal.style.display = "none";
+}
+
+
+// När användaren klickar utanför modalen, stäng den
+window.onclick = function(event) {
+  var modal = document.getElementById('id01');
+  if (event.target == modal) {
+      closeModal();
+  }
+}
+
+// Formulärhantering
+document.getElementById('bokningsForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Förhindra att formuläret skickas på vanligt sätt och sidan laddas om
+
+  // Visa bekräftelsemeddelandet
+  const confirmationMessage = document.getElementById('confirmationMessage');
+  confirmationMessage.style.display = 'block'; // Gör bekräftelsemeddelandet synligt
+
+  // Rensa formuläret efter inlämning
+  document.getElementById('bokningsForm').reset();
+
+  // Stäng modalen
+  modal.style.display = 'none';
+
+  // Dölja bekräftelsen efter 5 sekunder
+  setTimeout(function() {
+    confirmationMessage.style.display = 'none'; // Dölj bekräftelsemeddelandet efter 5 sekunder
+  }, 5000); // 5000 ms = 5 sekunder
+});
+
+console.log("Formuläret skickades");
+confirmationMessage.style.display = 'block';
+console.log("Bekräftelsemeddelande borde synas");
