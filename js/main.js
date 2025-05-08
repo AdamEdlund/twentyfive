@@ -13,41 +13,37 @@ const months = [
 ];
 
 function renderCalendar(month, year) {
-    calendarDates.innerHTML = '';
-    monthYear.textContent = `${months[month]} ${year}`;
-  
-    const firstDay = new Date(year, month, 1).getDay();
-  
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-  
-    for (let i = 0; i < firstDay; i++) {
-      const blank = document.createElement('div');
-      calendarDates.appendChild(blank);
+  calendarDates.innerHTML = '';
+  monthYear.textContent = `${months[month]} ${year}`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Lägg till tomma rutor före månadens första dag
+  for (let i = 0; i < firstDay; i++) {
+    const blank = document.createElement('div');
+    calendarDates.appendChild(blank);
+  }
+
+  const today = new Date();
+
+  // Skapa dagarna i månaden
+  for (let i = 1; i <= daysInMonth; i++) {
+    const day = document.createElement('div');
+    day.textContent = i;
+
+    if (
+      i === today.getDate() &&
+      year === today.getFullYear() &&
+      month === today.getMonth()
+    ) {
+      day.classList.add('current-date');
     }
-  
-    for (let i = 1; i <= daysInMonth; i++) {
-      const day = document.createElement('div');
-      day.textContent = i;
-      calendarDates.appendChild(day);
-    }
 
-    const today = new Date();
-
-    for (let i = 1; i <= daysInMonth; i++) {
-        const day = document.createElement('div');
-        day.textContent = i;
-
-        if (
-        i === today.getDate() &&
-        year === today.getFullYear() &&
-        month === today.getMonth()
-        ) {
-        day.classList.add('current-date');
-        }
-
-        calendarDates.appendChild(day);
-    }
+    calendarDates.appendChild(day);
+  }
 }
+
 
 renderCalendar(currentMonth, currentYear);
 
@@ -111,7 +107,9 @@ document.getElementById('bokningsForm').addEventListener('submit', function(e) {
   document.getElementById('bokningsForm').reset();
 
   // Stäng modalen
-  modal.style.display = 'none';
+  function closeModal() {
+    document.getElementById('id01').style.display = 'none';
+  }
 
   // Dölja bekräftelsen efter 5 sekunder
   setTimeout(function() {
@@ -122,3 +120,7 @@ document.getElementById('bokningsForm').addEventListener('submit', function(e) {
 console.log("Formuläret skickades");
 confirmationMessage.style.display = 'block';
 console.log("Bekräftelsemeddelande borde synas");
+
+function productClicked(productName) {
+  alert("Du har valt: " + productName);
+}
