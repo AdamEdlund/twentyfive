@@ -1,48 +1,100 @@
-const calendarDates = document.querySelector('.calendar-dates');
-const monthYear = document.getElementById('month-year');
-const prevMonthBtn = document.getElementById('prev-month');
-const nextMonthBtn = document.getElementById('next-month');
-
-let currentDate = new Date();
-let currentMonth = currentDate.getMonth();
-let currentYear = currentDate.getFullYear();
-
-const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-];
-
-function renderCalendar(month, year) {
-  calendarDates.innerHTML = '';
-  monthYear.textContent = `${months[month]} ${year}`;
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  // Lägg till tomma rutor före månadens första dag
-  for (let i = 0; i < firstDay; i++) {
-    const blank = document.createElement('div');
-    calendarDates.appendChild(blank);
+document.addEventListener("DOMContentLoaded", () => {
+  // Hamburger menu code
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.querySelector('.navbuttons');
+  
+  // Kontrollera att båda elementen finns innan vi fortsätter
+  if (!hamburger) {
+    console.error("Hamburger element not found! Check if ID 'hamburger' exists in HTML.");
+  } else if (!navMenu) {
+    console.error("Navigation menu not found! Check if class 'navbuttons' exists in HTML.");
+  } else {
+    hamburger.addEventListener('click', () => {
+      console.log("Hamburger clicked");
+      navMenu.classList.toggle('show');
+    });
   }
 
-  const today = new Date();
+  // Calendar code
+  const calendarDates = document.querySelector('.calendar-dates');
+  const monthYear = document.getElementById('month-year');
+  const prevMonthBtn = document.getElementById('prev-month');
+  const nextMonthBtn = document.getElementById('next-month');
 
-  // Skapa dagarna i månaden
-  for (let i = 1; i <= daysInMonth; i++) {
-    const day = document.createElement('div');
-    day.textContent = i;
+  // Only proceed with calendar if the elements exist
+  if (calendarDates && monthYear && prevMonthBtn && nextMonthBtn) {
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
 
-    if (
-      i === today.getDate() &&
-      year === today.getFullYear() &&
-      month === today.getMonth()
-    ) {
-      day.classList.add('current-date');
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    function renderCalendar(month, year) {
+      calendarDates.innerHTML = '';
+      monthYear.textContent = `${months[month]} ${year}`;
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const blank = document.createElement('div');
+        calendarDates.appendChild(blank);
+      }
+
+      const today = new Date();
+
+      for (let i = 1; i <= daysInMonth; i++) {
+        const day = document.createElement('div');
+        day.textContent = i;
+
+        if (
+          i === today.getDate() &&
+          year === today.getFullYear() &&
+          month === today.getMonth()
+        ) {
+          day.classList.add('current-date');
+        }
+
+        calendarDates.appendChild(day);
+      }
     }
 
-    calendarDates.appendChild(day);
+    // Initial render of calendar
+    renderCalendar(currentMonth, currentYear);
+
+    // Add event listeners for the calendar
+    prevMonthBtn.addEventListener('click', () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar(currentMonth, currentYear);
+    });
+    
+    nextMonthBtn.addEventListener('click', () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar(currentMonth, currentYear);
+    });
+
+    if (calendarDates) {
+      calendarDates.addEventListener('click', (e) => {
+        window.location.href = "bokning.html";
+      });
+    }
+  } else {
+    console.error("Calendar elements not found. Check if needed elements exist in HTML.");
   }
-}
+});
+
+
 
 
 renderCalendar(currentMonth, currentYear);
@@ -74,47 +126,42 @@ var modal = document.getElementById('id01');
 var btn = document.querySelector('.bok_knapp.main');
 var span = document.getElementsByClassName('close')[0];
 
-// Funktion för att öppna modalen
 function openModal() {
   var modal = document.getElementById('id01');
   modal.style.display = "block";
 }
 
-// När användaren klickar på "x" (stängknappen), stäng modalen
 function closeModal() {
   var modal = document.getElementById('id01');
   modal.style.display = "none";
 }
 
 
-// När användaren klickar utanför modalen, stäng den
 window.onclick = function(event) {
   var modal = document.getElementById('id01');
   if (event.target == modal) {
       closeModal();
   }
 }
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('bokningsForm');
+  const confirmationMessage = document.getElementById('confMess'); 
 
-// Formulärhantering
-document.getElementById('bokningsForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // Förhindra att formuläret skickas på vanligt sätt och sidan laddas om
+  if (form && confirmationMessage) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-  // Visa bekräftelsemeddelandet
-  const confirmationMessage = document.getElementById('confirmationMessage');
-  confirmationMessage.style.display = 'block'; // Gör bekräftelsemeddelandet synligt
+      form.reset();
 
-  // Rensa formuläret efter inlämning
-  document.getElementById('bokningsForm').reset();
+      document.getElementById('id01').style.display = 'none';
 
-  // Stäng modalen
-  function closeModal() {
-    document.getElementById('id01').style.display = 'none';
+      setTimeout(function () {
+        confirmationMessage.style.display = 'none';
+      }, 5000);
+    });
+  } else {
+    console.error("Formuläret eller bekräftelsemeddelandet hittades inte.");
   }
-
-  // Dölja bekräftelsen efter 5 sekunder
-  setTimeout(function() {
-    confirmationMessage.style.display = 'none'; // Dölj bekräftelsemeddelandet efter 5 sekunder
-  }, 5000); // 5000 ms = 5 sekunder
 });
 
 console.log("Formuläret skickades");

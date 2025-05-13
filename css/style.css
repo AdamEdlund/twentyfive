@@ -62,7 +62,27 @@ body {
     z-index: 1000;
     font-family: 'Times New Roman', Times, serif;
 }
-  
+
+/* Hamburgermeny */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.material-icons {
+  font-size: 35px;
+}
+
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
@@ -70,7 +90,7 @@ body {
     color: black;
 }
   
-.nav-buttons {
+.navbuttons {
     display: flex;
     gap: 1rem;
 }
@@ -322,7 +342,7 @@ input[type=text]:focus, input[type=password]:focus {
     width: 50%;
 }
 
-#confMess {
+#confirmationMessage {
     display: none; 
     color: green; 
     margin-top: 20px;
@@ -429,7 +449,7 @@ hr {
     font-size: 1.2rem;
 }
 
-.nav-buttons .nav-btn {
+.navbuttons .navbtn {
     margin-left: 1rem;
     text-decoration: none;
     color: #444;
@@ -483,12 +503,8 @@ hr {
 .buy-button:hover {
     background-color: #444;
 }
-  
-    
-@media screen and (max-width: 419px) {
-    .weekdays li, .days li {width: 12.5%;}
-    .days li .active {padding: 2px;}
 
+@media screen and (max-width: 999px) {
     .card {
         display: flex;
         flex-direction: row; 
@@ -512,6 +528,33 @@ hr {
     .column {
         width: 100%;
         display: block;
+    }
+}
+  
+    
+@media screen and (max-width: 768px) {
+    .weekdays li, .days li {width: 12.5%;}
+    .days li .active {padding: 2px;}
+
+    .navbuttons {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        width: 100%;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 1rem;
+        z-index: 1000;
+    }
+
+    .navbuttons.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
     }
 
     .product-grid {
